@@ -1,0 +1,45 @@
+{
+  "message": "Data fetched successfully",
+  "status": "200",
+  "token": "",
+  "data": "",
+  "data1": [
+    {
+      "status": "Rejected",
+      "remark": "Intermediary sales can be registered by Electricians only",
+      "primaryDetail": "",
+      "productType": "",
+      "modelName": null,
+      "serialNoCount": "XYZB88g1500002",
+      "wrsPoint": 0,
+      "wrsPointAccepted": 0,
+      "wrsPointPending": 0,
+      "wrsPointRejected": 0
+    },
+    {
+      "status": "Accepted",
+      "remark": "Intermediary sales registered.",
+      "primaryDetail": "",
+      "productType": "",
+      "modelName": null,
+      "serialNoCount": "XYZB88g1500001",
+      "wrsPoint": 100,
+      "wrsPointAccepted": 0,
+      "wrsPointPending": 0,
+      "wrsPointRejected": 0
+    },
+    {
+      "status": "Pending",
+      "remark": "Intermediary sales registered.",
+      "primaryDetail": "",
+      "productType": "",
+      "modelName": null,
+      "serialNoCount": "XYZB88g1500003",
+      "wrsPoint": 100,
+      "wrsPointAccepted": 0,
+      "wrsPointPending": 0,
+      "wrsPointRejected": 0
+    }
+
+  ]
+}

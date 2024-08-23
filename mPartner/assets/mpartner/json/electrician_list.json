@@ -1,0 +1,28 @@
+{
+  "message": "Data fetched successfully",
+  "status": "200",
+  "token": "",
+  "data": [
+    {
+      "elec_Name": "Dummy Electrician for test 62",
+      "elec_Address1": "New Tehsil Road ,Govond Puri , Modi Nagar ,  Opp M",
+      "elec_Address2": "ahila Polytec",
+      "elec_Sap_Code": "9900000067",
+      "elec_City": "Alwar",
+      "elec_District": "Modinagar",
+      "elec_State": "Rajasthan",
+      "elec_Phone": "9903994534"
+    },
+    {
+      "elec_Name": "Dummy Electrician for test 63",
+      "elec_Address1": "New Tehsil Road ,Govond Puri , Modi Nagar ,  Opp M",
+      "elec_Address2": "ahila Polytec",
+      "elec_Sap_Code": "9900000068",
+      "elec_City": "DEHARDUN",
+      "elec_District": "Modinagar",
+      "elec_State": "Uttarakhand",
+      "elec_Phone": "8506040497"
+    }
+  ],
+  "data1": null
+}

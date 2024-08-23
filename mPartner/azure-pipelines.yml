@@ -1,0 +1,138 @@
+trigger: none
+
+parameters:
+- name: Android_Build
+  displayName: Android_Build
+  type: boolean
+  default: false
+
+- name: IOS_Build
+  displayName: IOS_Build
+  type: boolean
+  default: false
+
+# - name: Flavour
+#   displayName: Choose Flavour
+#   type: string
+#   default: dev
+#   values:
+#     - dev
+#     - staging
+#     - prod
+
+# variables:
+# - name: flavour
+#   value: ${{parameters.Flavour}}
+
+  
+stages:
+- stage: Android
+  pool:
+    vmImage: 'ubuntu-latest'
+  displayName: Android Build
+  condition: eq('${{ parameters.Android_Build }}', true)
+
+  jobs: 
+  - job: Build
+    steps:
+    - task: FlutterInstall@0
+      displayName: Install Flutter
+      inputs:
+        channel: 'stable'
+        version: 'latest'
+
+    - script : flutter clean
+      displayName: Flutter clean
+
+    - script : flutter pub get
+      displayName: Flutter pub get
+
+    - script : flutter build apk --release -t lib/main_staging.dart --flavor staging 
+      displayName: Flutter Build Apk
+
+    - task: PublishBuildArtifacts@1
+      displayName: Publish artifact
+      inputs:
+        PathtoPublish: '$(Build.Repository.LocalPath)/build/app/outputs'
+        ArtifactName: 'apk'
+        publishLocation: 'Container'
+
+
+- stage: IOS
+
+  pool:
+    vmImage: 'macOS-latest'
+  variables:
+    - name: configuration
+      value: "Release"
+    - name: sdk
+      value: "iphoneos"
+
+  displayName: IOS BUILD
+  condition: eq(${{ parameters.IOS_Build }}, true)
+
+  jobs: 
+  - job: Build
+    steps:
+
+    - task: InstallAppleCertificate@2
+      displayName: "Install Apple p12 cert"
+      inputs:
+        certSecureFile: "Luminous.p12"
+        certPwd: 'Luminous@1'
+        keychain: "temp"
+
+    - task: InstallAppleProvisioningProfile@1
+      displayName: "Install Apple Mobile Provisioning Profile"
+      inputs:
+        provisioningProfileLocation: "secureFiles"
+        provProfileSecureFile: "MPartnerV1AppStore.mobileprovision"
+
+    - task: FlutterInstall@0
+      inputs:
+        mode: 'auto'
+        channel: 'stable'
+        version: 'latest'
+    # - script: cd $(Build.SourcesDirectory)/ios; gem install cocoapods; flutter pub get; pod install
+    #   displayName: 'Install CocoaPods'
+
+    - task: FlutterBuild@0
+      displayName: "Flutter Build Apps - iOS"
+      inputs:
+        target: "ios"
+        buildName: "$(Build.BuildNumber)"
+        entryPoint: "lib/main_staging.dart"
+        iosCodesign: false
+
+    - task: Xcode@5
+      condition: true
+      inputs:
+        actions: 'archive'
+        sdk: 'iphoneos'
+        # xcodeVersion: '13'
+        scheme: 'Runner'
+        exportOptions: 'plist'
+        exportOptionsPlist: 'ios/exportOptions.plist'
+        configuration: 'Release'
+        archivePath: 'build/ios/Runner.xcarchive'
+        exportPath: 'build/ios'
+        packageApp: true
+        teamId: 'G29596D55A'
+        xcWorkspacePath: '**/Runner.xcworkspace'
+        signingOption: 'manual'
+        args: '-verbose'
+        signingIdentity: '$(APPLE_CERTIFICATE_SIGNING_IDENTITY)'
+        provisioningProfileUuid: '$(APPLE_PROV_PROFILE_UUID)'
+
+    - task: CopyFiles@2
+      inputs:
+        contents: '**/*.ipa'
+        targetFolder: '$(build.artifactStagingDirectory)'
+        OverWrite: true
+
+    - task: PublishPipelineArtifact@1
+      displayName: 'Publish Pipeline Artifact'
+      inputs:
+        targetPath: '$(build.artifactstagingdirectory)'
+        artifact: 'ios ipa'
+

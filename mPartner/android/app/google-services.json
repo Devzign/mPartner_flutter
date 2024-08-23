@@ -1,0 +1,99 @@
+{
+  "project_info": {
+    "project_number": "579150856149",
+    "firebase_url": "https://mpartner-56eb4.firebaseio.com",
+    "project_id": "mpartner-56eb4",
+    "storage_bucket": "mpartner-56eb4.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:579150856149:android:f271bfe737f9992383875c",
+        "android_client_info": {
+          "package_name": "com.luminous.mPartnerSouthAfrica"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "579150856149-asg7ebb4ecqipi04cgtasdtkactr1m22.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB7e41IbglIY7Od37v85qJpP87rYE8ySkE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "579150856149-asg7ebb4ecqipi04cgtasdtkactr1m22.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "579150856149-6cpa0ht2a97iu7uk444lilu4algvdhmo.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.luminous.mpartner"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:579150856149:android:cc07df517cec0fab",
+        "android_client_info": {
+          "package_name": "com.luminous.mpartner"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "579150856149-bkmh4d9b5t2s7785k3cf16g4gp42d05n.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.luminous.mpartner",
+            "certificate_hash": "f1633865e468b0c4fc91e558d52e7528a12f9c38"
+          }
+        },
+        {
+          "client_id": "579150856149-nsu0bkstfg23299eh113djk9r9s2tcfj.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.luminous.mpartner",
+            "certificate_hash": "64ddc7dd26dc62199bbb750828f18439ebee2d07"
+          }
+        },
+        {
+          "client_id": "579150856149-asg7ebb4ecqipi04cgtasdtkactr1m22.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB7e41IbglIY7Od37v85qJpP87rYE8ySkE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "579150856149-asg7ebb4ecqipi04cgtasdtkactr1m22.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "579150856149-6cpa0ht2a97iu7uk444lilu4algvdhmo.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.luminous.mpartner"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

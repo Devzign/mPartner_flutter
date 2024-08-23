@@ -1,0 +1,141 @@
+import 'dart:ui';
+
+import 'package:get/get.dart';
+
+import '../presentation/view/app.dart';
+import '../solar/state/controller/ProjectExecutionFormController.dart';
+import '../solar/state/controller/finance_customer_project_details_controller.dart';
+import '../solar/state/controller/finance_request_list_commercial_controller.dart';
+import '../solar/state/controller/finance_requests_lists_controller.dart';
+import '../solar/state/controller/solar_design_request_controller.dart';
+import '../solar/state/controller/solar_finance_dashboard_controller.dart';
+import '../solar/state/controller/solar_design_count_details_controller.dart';
+import '../solar/state/controller/banking_partners_controller.dart';
+import '../solar/state/controller/solar_finance_controller.dart';
+import '../solar/state/controller/digital_survey_request_list_controller.dart';
+import '../solar/state/controller/digital_request_by_project_id_controller.dart';
+import '../solar/state/controller/terms_and_condition_controller.dart';
+import '../solar/state/controller/go_solar_count_details_controller.dart';
+import '../utils/app_constants.dart';
+import '../utils/localdata/language_constants.dart';
+import '../utils/localdata/shared_preferences_util.dart';
+import 'contoller/ISmartCashHistoryController.dart';
+import '../solar/state/controller/ProjectExecutionRequestListController.dart';
+import 'contoller/app_setting_value_controller.dart';
+import 'contoller/auth_contoller.dart';
+import 'contoller/battery_management_controller.dart';
+import 'contoller/cash_redemption_options_controller.dart';
+import 'contoller/cash_summary_controller.dart';
+import 'contoller/catalogue_controller.dart';
+import 'contoller/coins_summary_controller.dart';
+import 'contoller/consumer_emi_controller.dart';
+import 'contoller/customer_list_controller.dart';
+import 'contoller/dealer_list_controller.dart';
+import 'contoller/fse_agreement_controller.dart';
+import 'contoller/fse_agreement_verify_otp_controller.dart';
+import 'contoller/help_and_support_controller.dart';
+import 'contoller/homepage_promo_videos_controller.dart';
+import 'contoller/language_controller.dart';
+import 'contoller/notification_controller.dart';
+import 'contoller/pinelab_redemption_controller.dart';
+import 'contoller/price_list_controller.dart';
+import '../solar/state/controller/project_execution_dashboard_controller.dart';
+import 'contoller/report_type_controller.dart';
+import 'contoller/save_terms_condition_controller.dart';
+import 'contoller/scheme_controller.dart';
+import 'contoller/secondary_report_distributor_controller.dart';
+import 'contoller/user_data_controller.dart';
+import 'contoller/verify_otp_controller.dart';
+
+void clearStates() async {
+  UserDataController udController = Get.find();
+  LanguageController langController = Get.find();
+  ISmartCashHistoryController iSCHController = Get.find();
+  CashRedemptionOptionsController cROController = Get.find();
+  ConsumerEmiController consumerEmiController = Get.find();
+  VerifyOtpController verifyOtpController = Get.find();
+  ReportTypeController reportTypeController = Get.find();
+  SecondaryReportDistrubutorController secondaryReportDistributorController =
+  Get.find();
+  DealerList dealerListController = Get.find();
+  CustomerList customerListController = Get.find();
+  HomepagePromoVideosController homepagePromoVideosController = Get.find();
+  BatteryManagementController batteryManagementController = Get.find();
+  HelpAndSupportController helpAndSupportController = Get.find();
+  PinelabRedemptionController pinelabRedemptionController = Get.find();
+  AuthController authController = Get.find();
+  NotificationController notificationController = Get.find();
+  FseAgreementController fseAgreementController = Get.find();
+  FseAgreementVerifyOtpController fseAgreementVerifyOtpController = Get.find();
+  PriceListController priceListController = Get.find();
+  SchemeController schemeController = Get.find();
+  CatalogueController catalogueController = Get.find();
+  CoinsSummaryController coinsSummaryController = Get.find();
+  CashSummaryController cashSummaryController = Get.find();
+  SaveTermsConditionController saveTermsConditionController = Get.find();
+  AppSettingValueController appSettingValueController = Get.find();
+  SolarDesignRequestController solarDesignRequestController = Get.find();
+
+  SolarFinanceDashboardController solarFinanceDashboardController = Get.find();
+  SolarDesignCountDetailsController solarDesignCountDetailsController = Get.find();  BankingPartnersController bankingPartnersController = Get.find();
+  SolarFinanceController solarFinanceController = Get.find();
+  DigitalSurveyRequestListController digitalSurveyRequestListController = Get.find();
+  DigitalRequestByProjectIdController digitalRequestByProjectIdController = Get.find();
+  TermsAndConditionController termsAndConditionController = Get.find();
+  ProjectExecutionDashboardController projectExecutionDashboardController = Get.find();
+  ProjectExecutionFormController projectExecutionFormController = Get.find();
+  ProjectExecutionRequestListController projectExecutionRequestListController = Get.find();
+  GoSolarCountDetailsController goSolarCountDetailsController = Get.find();
+  FinanceRequestsListCommercialController financeRequestsListCommercialController = Get.find();
+  FinanceRequestsListController financeRequestsListController = Get.find();
+  FinanceCustomerProjectDetailsController financeCustomerProjectDetailsController = Get.find();
+
+  await SharedPreferencesUtil.clearAll();
+
+  udController.clearUserData();
+  langController.clearLangData();
+  iSCHController.clearIsmartCashHistory();
+  cROController.clearCashRedemptionOptionsState();
+  consumerEmiController.clearConsumerEmiController();
+  verifyOtpController.clearVerifyOtpData();
+  reportTypeController.clearReportTypeOptionsState();
+  dealerListController.clearDealerList();
+  customerListController.clearCustomerList();
+  homepagePromoVideosController.clearState();
+  batteryManagementController.clearBatteryManagementController();
+  helpAndSupportController.clearHelpAndSupportController();
+  pinelabRedemptionController.clearPinelabredemptionController();
+  authController.clearAuthData();
+  notificationController.clearNotificationController();
+  fseAgreementController.clearFseAgreementController();
+  fseAgreementVerifyOtpController.clearFseAgreementVerifyOtpController();
+  priceListController.clearPriceList();
+  schemeController.clearSchemeList();
+  coinsSummaryController.clearCoinSummary();
+  cashSummaryController.clearCashSummary();
+  saveTermsConditionController.clearSaveTermsConditionController();
+  appSettingValueController.clearData();
+  solarDesignRequestController.clearState();
+  solarFinanceDashboardController.clearSolarFinanceDashboard();
+  solarDesignCountDetailsController.clearSolarDesignCountDetailsController();
+  secondaryReportDistributorController.clearSecondaryReportState();
+  try {
+    //setting default language
+    Locale locale = await setLocale(ENGLISH, DEFAULT_LANG_NAME);
+    MainApp.setLocale(navigatorKey.currentState!.context, locale);
+  } catch (e) {
+    e.printError();
+  }
+  bankingPartnersController.clearBankingPartnersController();
+  solarFinanceController.clearSolarFinanceController();
+  digitalSurveyRequestListController.clearDigitalSurveyRequests();
+  digitalRequestByProjectIdController.clearDigitalRequestByProjectId();
+  termsAndConditionController.clearTermsAndConditionController();
+  projectExecutionDashboardController.clearProjectExecutionDashboard();
+  projectExecutionFormController.clearState();
+  projectExecutionRequestListController.clearPERequests();
+  goSolarCountDetailsController.clearGoSolarCountDetailsController();
+  financeRequestsListCommercialController.clearFinanceRequestList();
+  financeRequestsListController.clearFinanceRequestList();
+  financeCustomerProjectDetailsController.clearCustomerProjectDetails();
+}
