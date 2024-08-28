@@ -18,6 +18,7 @@ import '../../presentation/screens/advertisement/create_ad_screen.dart';
 import '../../presentation/screens/battery_management/battery_management.dart';
 import '../../presentation/screens/cashredemption/paytm/enter_mobile_screen_paytm.dart';
 import '../../presentation/screens/cashredemption/pinelab/pinelab_redemption.dart';
+import '../../presentation/screens/cashredemption/upi/enter_upi_id_screen.dart';
 import '../../presentation/screens/cashredemption/upi/enter_upi_screen.dart';
 import '../../presentation/screens/help_and_support/help_and_support.dart';
 import '../../presentation/screens/help_and_support/preview_screen.dart';
@@ -628,6 +629,7 @@ class AppRoutes {
   static const secondaryReportDealer = '/secondaryReportDealer';
   static const tertiaryReport = '/tertiaryReport';
   static const upiScreen = '/enterUPIScreen';
+  static const upiIdScreen = '/enterUPIIdScreen';
   static const pinelabRedemption = '/pinelabRedemption';
   static const menu = '/menu';
   static const peDashboard = '/peDashboard';
@@ -693,6 +695,7 @@ class AppRoutes {
     secondaryReportDealer: (context) => const SecondaryReportDealer(),
     tertiaryReport: (context) => const TertiaryReportScreen(),
     upiScreen: (context) => const EnterUPIScreen(),
+    upiIdScreen: (context) => const EnterUPIIDScreen(),
     pinelabRedemption: (context) => const PinelabRedemption(),
     menu: (context) => const Menu(),
     luminousVideoPage: (context) => LuminousVideos(),

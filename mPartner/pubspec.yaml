@@ -35,8 +35,8 @@ dependencies:
   flutter:
     sdk: flutter
 
-  screenshot: ^2.3.0
-  intl: ^0.18.1
+  screenshot:
+  intl:
   flutter_bloc: ^8.1.5
   dio: ^5.4.3+1
   equatable: ^2.0.5

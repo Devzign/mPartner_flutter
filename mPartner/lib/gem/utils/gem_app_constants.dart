@@ -54,6 +54,7 @@ class GemAppConstants {
   static const int aadharInputMaxLength = 12;
 
   static const int maxImagesCount = 10; // to be upload in help and support
+
   static const int imageCompressPercentage = 50; // image compress percentage
   static const double? imageMaxHeight = 1080;
   static const double? imageMaxWidth = 1920;

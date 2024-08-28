@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-
 import '../../../../data/datasource/mpartner_remote_data_source.dart';
 import '../../../../data/models/upi_beneficiary_model.dart';
 import '../../../../services/services_locator.dart';
@@ -11,6 +10,7 @@ import '../../../../utils/app_constants.dart';
 import '../../../../utils/displaymethods/display_methods.dart';
 import '../../../../utils/localdata/language_constants.dart';
 import '../../../../utils/localdata/shared_preferences_util.dart';
+import '../../../../utils/routes/app_routes.dart';
 import '../../../widgets/common_button.dart';
 import '../../../widgets/something_went_wrong_widget.dart';
 import '../../../widgets/verticalspace/vertical_space.dart';
@@ -21,6 +21,7 @@ import '../../../widgets/headers/header_widget_with_cash_info.dart';
 import '../widgets/info_widget.dart';
 import '../widgets/registered_num_widget.dart';
 import '../widgets/verification_failed_alert.dart';
+import '../widgets/upiid_add_alert.dart';
 import 'enter_amount_screen_upi.dart';
 
 class EnterUPIScreen extends StatefulWidget {
@@ -52,12 +53,6 @@ class _EnterUPIScreen extends BaseScreenState<EnterUPIScreen> {
       BaseMPartnerRemoteDataSource mPartnerRemoteDataSource =
           sl<BaseMPartnerRemoteDataSource>();
       UserDataController userDataController = Get.find();
-
-      // logger.d('[UPI_RA] fetching geo code.... ');
-      // await determineGeoCode();
-      // logger.d('[UPI_RA] Fetching address.... ');
-      // await getAddress();
-      // logger.d('[UPI_RA] checking handshake flag?  ${userDataController.userProfile[0].handshakeFlag}');
 
       int? handshakeFlag = 0;
       await SharedPreferencesUtil.getUpiHandShakeFlag().then((value) {
@@ -120,13 +115,19 @@ class _EnterUPIScreen extends BaseScreenState<EnterUPIScreen> {
               isVerified = false;
             });
             _isVerificationAlertShown = true;
-            showVerificationFailedAlert(
-                (r.message != '') ? r.message : r.apimessage,
-                context,
-                DisplayMethods(context: context).getVariablePixelHeight(),
-                DisplayMethods(context: context).getVariablePixelWidth(),
-                DisplayMethods(context: context).getTextFontMultiplier(),
-                DisplayMethods(context: context).getPixelMultiplier());
+            showAddUPIAlert(
+              'UPI ID not found against registered mobile number. Please add UPI ID.Add UPI ID',
+              context,
+              DisplayMethods(context: context).getVariablePixelHeight(),
+              DisplayMethods(context: context).getVariablePixelWidth(),
+              DisplayMethods(context: context).getTextFontMultiplier(),
+              DisplayMethods(context: context).getPixelMultiplier(),
+              alertTitle: 'Redemption Alert!',
+              buttonText: 'Add UPI ID',
+              onTap: () {
+                Navigator.of(context).pushNamed(AppRoutes.upiIdScreen);
+              },
+            );
           }
         });
       } else {
@@ -141,9 +142,6 @@ class _EnterUPIScreen extends BaseScreenState<EnterUPIScreen> {
   @override
   Widget baseBody(BuildContext context) {
     UserDataController userDataController = Get.find();
-
-    double screenHeight = MediaQuery.of(context).size.height;
-    double screenWidth = MediaQuery.of(context).size.width;
     double variablePixelHeight =
         DisplayMethods(context: context).getVariablePixelHeight();
     double variablePixelWidth =
@@ -156,66 +154,66 @@ class _EnterUPIScreen extends BaseScreenState<EnterUPIScreen> {
       backgroundColor: AppColors.white,
       body: SafeArea(
         child: Column(
-              children: [
-                HeaderWidgetWithCashInfo(
-                  heading: translation(context).upi,
-                  onPressBack: () {
-                    Navigator.of(context).pop();
-                  }, icon: Icon(
-                  Icons.arrow_back_outlined,
-                  color: AppColors.iconColor,
-                  size: 24 * pixelMultiplier,
-                ),
-                ),
-                UserProfileWidget(top: 8*variablePixelHeight),
-                (isLoading)
-                    ? const Expanded(
-                        child: Center(child: CircularProgressIndicator()))
-                    : (somethingWentWrong)
-                        ? const SomethingWentWrongWidget()
-                        : Expanded(
-                          child: ListView(
-                            padding: EdgeInsets.zero,
-                            children: [
-                              RegisteredNumberWidget(
-                                number: userDataController.phoneNumber,
-                                verified: isVerified,
-                              ),
-                              const VerticalSpace(height: 8),
-                              (isVerified)
-                                  ? InfoWidget(
-                                      message: beneficiaryDetails.upiMessage,
-                                    )
-                                  : Container(),
-                              (isVerified)
-                                  ? Padding(
-                                      padding: EdgeInsets.fromLTRB(
-                                          24 * variablePixelWidth,
-                                          32 * variablePixelHeight,
-                                          24 * variablePixelWidth,
-                                          0),
-                                      child: Container(
-                                        alignment: Alignment.topLeft,
-                                        child: Text(
-                                          translation(context)
-                                              .beneficiaryDetails,
-                                          style: GoogleFonts.poppins(
-                                            color: AppColors.darkGreyText,
-                                            fontSize: 16 * textMultiplier,
-                                            height: 24 / 16,
-                                            fontWeight: FontWeight.w500,
-                                          ),
+          children: [
+            HeaderWidgetWithCashInfo(
+              heading: translation(context).upi,
+              onPressBack: () {
+                Navigator.of(context).pop();
+              },
+              icon: Icon(
+                Icons.arrow_back_outlined,
+                color: AppColors.iconColor,
+                size: 24 * pixelMultiplier,
+              ),
+            ),
+            UserProfileWidget(top: 8 * variablePixelHeight),
+            (isLoading)
+                ? const Expanded(
+                    child: Center(child: CircularProgressIndicator()))
+                : (somethingWentWrong)
+                    ? const SomethingWentWrongWidget()
+                    : Expanded(
+                        child: ListView(
+                          padding: EdgeInsets.zero,
+                          children: [
+                            RegisteredNumberWidget(
+                              number: userDataController.phoneNumber,
+                              verified: isVerified,
+                            ),
+                            const VerticalSpace(height: 8),
+                            (isVerified)
+                                ? InfoWidget(
+                                    message: beneficiaryDetails.upiMessage,
+                                  )
+                                : Container(),
+                            (isVerified)
+                                ? Padding(
+                                    padding: EdgeInsets.fromLTRB(
+                                        24 * variablePixelWidth,
+                                        32 * variablePixelHeight,
+                                        24 * variablePixelWidth,
+                                        0),
+                                    child: Container(
+                                      alignment: Alignment.topLeft,
+                                      child: Text(
+                                        translation(context).beneficiaryDetails,
+                                        style: GoogleFonts.poppins(
+                                          color: AppColors.darkGreyText,
+                                          fontSize: 16 * textMultiplier,
+                                          height: 24 / 16,
+                                          fontWeight: FontWeight.w500,
                                         ),
                                       ),
-                                    )
-                                  : Container(),
-                              (isVerified)
-                                  ? BeneficiaryDetailsCard(
-                                      beneficiaryDetails: beneficiaryDetails)
-                                  : Container(),
-                            ],
-                          ),
+                                    ),
+                                  )
+                                : Container(),
+                            (isVerified)
+                                ? BeneficiaryDetailsCard(
+                                    beneficiaryDetails: beneficiaryDetails)
+                                : Container(),
+                          ],
                         ),
+                      ),
             if (!somethingWentWrong && !isLoading)
               Container(
                 padding: EdgeInsets.fromLTRB(
