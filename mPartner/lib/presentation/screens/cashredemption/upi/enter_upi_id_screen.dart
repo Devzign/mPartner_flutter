@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import '../../../../data/models/upi_beneficiary_model.dart';
 import '../../../../utils/app_colors.dart';
 import '../../../../utils/displaymethods/display_methods.dart';
@@ -49,8 +48,9 @@ class _EnterUPIScreen extends BaseScreenState<EnterUPIIDScreen> {
 
     _confirmUPIID.addListener(() {
       setState(() {
-        if (_confirmUPIID.text.contains('@') && selectedUPISuffix.isNotEmpty) {
+        if (_confirmUPIID.text.contains('@')) {
           showUPITagsForConfirmUPIID = true;
+          showUPITagsForUPIID = false;  // Hide UPI list for the first field
         } else {
           showUPITagsForConfirmUPIID = false;
         }
@@ -73,7 +73,6 @@ class _EnterUPIScreen extends BaseScreenState<EnterUPIIDScreen> {
     );
 
     setState(() {
-      showUPITagsForUPIID = false;
       confirmUPIEnabled = true; // Enable confirm UPI after selection
     });
   }
@@ -104,11 +103,11 @@ class _EnterUPIScreen extends BaseScreenState<EnterUPIIDScreen> {
   @override
   Widget baseBody(BuildContext context) {
     double variablePixelHeight =
-        DisplayMethods(context: context).getVariablePixelHeight();
+    DisplayMethods(context: context).getVariablePixelHeight();
     double variablePixelWidth =
-        DisplayMethods(context: context).getVariablePixelWidth();
+    DisplayMethods(context: context).getVariablePixelWidth();
     double pixelMultiplier =
-        DisplayMethods(context: context).getPixelMultiplier();
+    DisplayMethods(context: context).getPixelMultiplier();
 
     return Scaffold(
       backgroundColor: AppColors.white,
@@ -207,11 +206,11 @@ class _EnterUPIScreen extends BaseScreenState<EnterUPIIDScreen> {
               child: CommonButton(
                 onPressed: isVerified
                     ? () {
-                        Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) => EnterAmountUPIScreen(
-                                  beneficiaryDetails: beneficiaryDetails,
-                                )));
-                      }
+                  Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => EnterAmountUPIScreen(
+                        beneficiaryDetails: beneficiaryDetails,
+                      )));
+                }
                     : null,
                 isEnabled: isVerified,
                 containerBackgroundColor: AppColors.white,
@@ -229,6 +228,7 @@ class _EnterUPIScreen extends BaseScreenState<EnterUPIIDScreen> {
       scrollDirection: Axis.horizontal,
       child: Row(
         children: [
+          _buildUPITag('@BARODAMPAY', isConfirmField),
           _buildUPITag('@ybl', isConfirmField),
           _buildUPITag('@axl', isConfirmField),
           _buildUPITag('@pthdfc', isConfirmField),
@@ -278,3 +278,4 @@ class _EnterUPIScreen extends BaseScreenState<EnterUPIIDScreen> {
     );
   }
 }
+
