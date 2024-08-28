@@ -2958,4 +2958,10 @@ class AppLocalizationsBe extends AppLocalizations {
   @override
   String get transferDetails => "স্থানান্তর বিবরণ";
 
+  @override
+  String get confirmUPIID => "Confirm UPI ID";
+
+  @override
+  String get enterConfirmUPIid => "Enter UPI ID again";
+
 }

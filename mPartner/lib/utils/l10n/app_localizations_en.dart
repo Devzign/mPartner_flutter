@@ -2952,4 +2952,10 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get transferDetails => "Transfer Details";
+
+  @override
+  String get confirmUPIID => "Confirm UPI ID";
+
+  @override
+  String get enterConfirmUPIid => "Enter UPI ID again";
 }

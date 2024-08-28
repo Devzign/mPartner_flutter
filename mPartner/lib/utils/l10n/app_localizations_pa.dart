@@ -2962,4 +2962,11 @@ class ApplocalizationsPa extends AppLocalizations {
 
   @override
   String get transferDetails => "ਤਬਾਦਲੇ ਦੇ ਵੇਰਵੇ";
+
+  @override
+  String get confirmUPIID => "Confirm UPI ID";
+
+  @override
+  String get enterConfirmUPIid => "Enter UPI ID again";
+
 }

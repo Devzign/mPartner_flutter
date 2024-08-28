@@ -2954,4 +2954,11 @@ class AppLocalizationsGu extends AppLocalizations {
 
   @override
   String get transferDetails => "ટ્રાન્સફર વિગતો";
+
+  @override
+  String get confirmUPIID => "Confirm UPI ID";
+
+  @override
+  String get enterConfirmUPIid => "Enter UPI ID again";
+
 }

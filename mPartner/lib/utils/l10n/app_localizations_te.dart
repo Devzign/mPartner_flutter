@@ -2980,4 +2980,11 @@ class ApplocalizationsTe extends AppLocalizations {
 
   @override
   String get transferDetails => "బదిలీ వివరాలు";
+
+  @override
+  String get confirmUPIID => "Confirm UPI ID";
+
+  @override
+  String get enterConfirmUPIid => "Enter UPI ID again";
+
 }

@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import '../../../../data/models/upi_beneficiary_model.dart';
 import '../../../../utils/app_colors.dart';
 import '../../../../utils/displaymethods/display_methods.dart';
 import '../../../../utils/localdata/language_constants.dart';
+import '../../../../utils/textfield_input_handler.dart';
 import '../../../widgets/common_button.dart';
 import '../../base_screen.dart';
+import '../../userprofile/components/form_field_widget.dart';
 import '../../userprofile/user_profile_widget.dart';
 import '../../../widgets/headers/header_widget_with_cash_info.dart';
 import 'enter_amount_screen_upi.dart';
-
 
 class EnterUPIIDScreen extends StatefulWidget {
   const EnterUPIIDScreen({super.key});
@@ -29,6 +31,7 @@ class _EnterUPIScreen extends BaseScreenState<EnterUPIIDScreen> {
   bool confirmUPIEnabled = false;
   String selectedUPISuffix = '';
   String upiVerifyValidationMessage = '';
+  String errorUPISelection = '';
   UPIBeneficiaryModel beneficiaryDetails = UPIBeneficiaryModel.empty();
 
   @override
@@ -101,11 +104,11 @@ class _EnterUPIScreen extends BaseScreenState<EnterUPIIDScreen> {
   @override
   Widget baseBody(BuildContext context) {
     double variablePixelHeight =
-    DisplayMethods(context: context).getVariablePixelHeight();
+        DisplayMethods(context: context).getVariablePixelHeight();
     double variablePixelWidth =
-    DisplayMethods(context: context).getVariablePixelWidth();
+        DisplayMethods(context: context).getVariablePixelWidth();
     double pixelMultiplier =
-    DisplayMethods(context: context).getPixelMultiplier();
+        DisplayMethods(context: context).getPixelMultiplier();
 
     return Scaffold(
       backgroundColor: AppColors.white,
@@ -133,22 +136,29 @@ class _EnterUPIScreen extends BaseScreenState<EnterUPIIDScreen> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        TextField(
+                        FormFieldWidget(
                           controller: _upiID,
-                          decoration: InputDecoration(
-                            labelText: 'UPI ID *',
-                            hintText: 'Enter UPI ID',
-                            border: const OutlineInputBorder(),
-                          ),
+                          keyboardType: TextInputType.text,
+                          inputFormatter: [
+                            HandleFirstSpaceAndDotInputFormatter(),
+                            HandleMultipleDotsInputFormatter(),
+                          ],
+                          textCapitalization: TextCapitalization.words,
+                          labelText: translation(context).upiId,
+                          hintText: translation(context).enterUpiId,
+                          errorText: errorUPISelection.isNotEmpty
+                              ? errorUPISelection
+                              : null,
                           onChanged: (value) {
                             setState(() {
                               if (!value.contains('@')) {
                                 _resetConfirmUPI();
                               }
-                              showUPITagsForUPIID =
-                                  value.contains('@') && selectedUPISuffix.isEmpty;
+                              showUPITagsForUPIID = value.contains('@') &&
+                                  selectedUPISuffix.isEmpty;
                             });
                           },
+                          onTap: () {},
                         ),
                         const SizedBox(height: 10),
                         if (showUPITagsForUPIID) _buildUPITagSelection(false),
@@ -162,19 +172,23 @@ class _EnterUPIScreen extends BaseScreenState<EnterUPIIDScreen> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          TextField(
+                          FormFieldWidget(
                             controller: _confirmUPIID,
-                            decoration: InputDecoration(
-                              labelText: 'Confirm UPI ID *',
-                              hintText: 'Enter UPI ID again',
-                              border: const OutlineInputBorder(),
-                              errorText: upiVerifyValidationMessage.isNotEmpty
-                                  ? upiVerifyValidationMessage
-                                  : null,
-                            ),
+                            keyboardType: TextInputType.text,
+                            inputFormatter: [
+                              HandleFirstSpaceAndDotInputFormatter(),
+                              HandleMultipleDotsInputFormatter(),
+                            ],
+                            textCapitalization: TextCapitalization.words,
+                            labelText: translation(context).confirmUPIID,
+                            hintText: translation(context).enterConfirmUPIid,
+                            errorText: upiVerifyValidationMessage.isNotEmpty
+                                ? upiVerifyValidationMessage
+                                : null,
                             onChanged: (value) {
                               _verifyUPIsMatch();
                             },
+                            onTap: () {},
                           ),
                           const SizedBox(height: 10),
                           if (showUPITagsForConfirmUPIID)
@@ -193,11 +207,11 @@ class _EnterUPIScreen extends BaseScreenState<EnterUPIIDScreen> {
               child: CommonButton(
                 onPressed: isVerified
                     ? () {
-                  Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => EnterAmountUPIScreen(
-                        beneficiaryDetails: beneficiaryDetails,
-                      )));
-                }
+                        Navigator.of(context).push(MaterialPageRoute(
+                            builder: (context) => EnterAmountUPIScreen(
+                                  beneficiaryDetails: beneficiaryDetails,
+                                )));
+                      }
                     : null,
                 isEnabled: isVerified,
                 containerBackgroundColor: AppColors.white,
@@ -252,8 +266,9 @@ class _EnterUPIScreen extends BaseScreenState<EnterUPIIDScreen> {
               color: selectedUPISuffix == tag ? Colors.blue : Colors.black,
             ),
           ),
-          backgroundColor:
-          selectedUPISuffix == tag ? Colors.lightBlue.shade100 : Colors.white,
+          backgroundColor: selectedUPISuffix == tag
+              ? Colors.lightBlue.shade100
+              : Colors.white,
           side: BorderSide(
             color: selectedUPISuffix == tag ? Colors.blue : Colors.black,
           ),
@@ -263,7 +278,3 @@ class _EnterUPIScreen extends BaseScreenState<EnterUPIIDScreen> {
     );
   }
 }
-
-
-
-

@@ -2989,4 +2989,11 @@ class ApplocalizationsTa extends AppLocalizations {
 
   @override
   String get transferDetails => "பரிமாற்ற விவரங்கள்";
+
+  @override
+  String get confirmUPIID => "Confirm UPI ID";
+
+  @override
+  String get enterConfirmUPIid => "Enter UPI ID again";
+
 }

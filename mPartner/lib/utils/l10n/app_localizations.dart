@@ -2033,10 +2033,13 @@ abstract class AppLocalizations {
 
   String get unblock_redeptionmessage;
 
-
   String get titleInternetConnectionIssue;
 
   String get transferDetails;
+
+  String get confirmUPIID;
+
+  String get enterConfirmUPIid;
 }
 
 class _AppLocalizationsDelegate

@@ -2935,7 +2935,8 @@ class ApplocalizationsKn extends AppLocalizations {
   String get unblock_redeption => "Unblock Redemption";
 
   @override
-  String get unblock_redeptionmessage =>"You are about to unblock this dealer for Redemption.";
+  String get unblock_redeptionmessage =>
+      "You are about to unblock this dealer for Redemption.";
 
   @override
   String get titleSerialNumber => "ಸೀರಿಯಲ್ ನಂಬರ್";
@@ -2972,4 +2973,11 @@ class ApplocalizationsKn extends AppLocalizations {
 
   @override
   String get transferDetails => "ವರ್ಗಾವಣೆ ವಿವರಗಳು";
+
+  @override
+  String get confirmUPIID => "Confirm UPI ID";
+
+  @override
+  String get enterConfirmUPIid => "Enter UPI ID again";
+
 }

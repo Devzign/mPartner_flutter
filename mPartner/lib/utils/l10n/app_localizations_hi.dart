@@ -2956,4 +2956,11 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get transferDetails => "ट्रांसफर विवरण";
+
+  @override
+  String get confirmUPIID => "Confirm UPI ID";
+
+  @override
+  String get enterConfirmUPIid => "Enter UPI ID again";
+
 }

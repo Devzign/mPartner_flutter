@@ -2978,4 +2978,11 @@ class ApplocalizationsOr extends AppLocalizations {
 
   @override
   String get transferDetails => "टବିବରଣୀ ସ୍ଥାନାନ୍ତର କରନ୍ତୁ |";
+
+  @override
+  String get confirmUPIID => "Confirm UPI ID";
+
+  @override
+  String get enterConfirmUPIid => "Enter UPI ID again";
+
 }

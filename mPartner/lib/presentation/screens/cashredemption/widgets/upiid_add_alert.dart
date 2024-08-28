@@ -44,8 +44,7 @@ void showAddUPIAlert(
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   GestureDetector(
-                    onTap: onTap ??
-                            () {
+                    onTap: () {
                           Navigator.of(context).pop();
                         },
                     child: Center(
